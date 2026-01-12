@@ -1,14 +1,8 @@
 package com.example.Exa.emMocCPV.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
 
-@Data
-//@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "productos")
 public class Producto {
@@ -37,4 +31,76 @@ public class Producto {
 
     @Column
     private Integer cantidad;
+
+    // Constructor vacío (necesario para JPA)
+    public Producto() {
+    }
+
+    // ============= GETTERS =============
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public float getPrecio() {
+        return precio;
+    }
+
+    public LocalDate getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    // ============= SETTERS =============
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public void setPrecio(float precio) {
+        this.precio = precio;
+    }
+
+    public void setFechaCreacion(LocalDate fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
 }
