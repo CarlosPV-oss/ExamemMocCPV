@@ -7,7 +7,7 @@ pipeline {
     }
     
     environment {
-        VERSION = '1.0.0'
+        VERSION_PROYECTO = '1.0.0'
     }
     
     stages {
@@ -42,29 +42,30 @@ pipeline {
         stage('Move jar') {
             steps {
                 script {
-                    echo 'Eliminando directorio versiones....'
+                    echo "Eliminando directorio versiones...."
                     
-                    // Verificar si existe la carpeta versiones y eliminarla
                     bat '''
                         if exist versiones (
                             rmdir /s /q versiones
                         )
                     '''
+                    
+                    echo "Se crea el directorio versiones con la última versión de la api"
+                    
+                    bat 'mkdir versiones'
+                    
+                    bat "copy target\\ExamenMocCPV-${VERSION_PROYECTO}.jar versiones\\productos-api-${VERSION_PROYECTO}.jar"
                 }
             }
-            post {
-                success {
-                    script {
-                        echo 'Se crea el directorio versiones con la última versión de la api'
-                        
-                        // Crear carpeta versiones
-                        bat 'mkdir versiones'
-                        
-                        // Copiar el jar (NO el original) a la carpeta versiones
-                        bat "copy target\\ExamenMocCPV-${VERSION}.jar versiones\\"
-                    }
-                }
-            }
+        }
+    }
+    
+    post {
+        success {
+            echo 'Pipeline completado con éxito!'
+        }
+        failure {
+            echo 'El pipeline ha fallado.'
         }
     }
 }
